@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>myapps</display-name>
+
+
+	<filter>
+		<filter-name>ssoPrincipalFilter</filter-name>
+		<filter-class>com.railinc.jook.drawers.myapps.SSOPrincipalFilter</filter-class>
+	</filter>
+
+
+	<filter-mapping>
+		<filter-name>ssoPrincipalFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<servlet>
+		<description>
+    	</description>
+		<display-name>SSORestService</display-name>
+		<servlet-name>SSORestService</servlet-name>
+		<servlet-class>com.railinc.jook.drawers.myapps.SSORestService</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SSORestService</servlet-name>
+		<url-pattern>/secured/myapps.html</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SSORestService</servlet-name>
+		<url-pattern>/secured/myapps.xml</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SSORestService</servlet-name>
+		<url-pattern>/secured/myapps.json</url-pattern>
+	</servlet-mapping>
+	
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	<resource-env-ref>
+		<resource-env-ref-name>dataServicesUrl</resource-env-ref-name>
+		<resource-env-ref-type>java.lang.String</resource-env-ref-type>
+	</resource-env-ref>
+</web-app>
+
+
+    
