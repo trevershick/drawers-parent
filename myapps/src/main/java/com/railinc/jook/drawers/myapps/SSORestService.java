@@ -98,6 +98,8 @@ public class SSORestService extends HttpServlet {
 		try {
 			URL url = new URL(theUrl);
 			conn = (HttpURLConnection) url.openConnection();
+			conn.setConnectTimeout(5000);
+			conn.setReadTimeout(5000);
 			int responseCode = conn.getResponseCode();
 			InputStream xml = conn.getInputStream();
 			
