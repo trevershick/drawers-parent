@@ -1,0 +1,28 @@
+
+<div id="feedback_main">
+
+    #if ($msg)
+      <div id="msgDiv"> $msg </div>
+    #end
+
+<h1>Report a problem</h1>
+${form}
+
+
+$links
+<script>
+function setFocus(field_id) {
+	jQuery("#" + field_id.split("_")[1]).focus();
+}
+	// make links
+jQuery(document).ready(function() {
+	jQuery('#feedback_main a').click(
+			function() {
+				jQuery("#feedback_main").parent().load(jQuery(this).attr("href"));
+				return false;
+	});
+	var options = {target:"#feedback_main"}; 
+	jQuery('#form').ajaxForm(options);
+});
+</script>
+</div>

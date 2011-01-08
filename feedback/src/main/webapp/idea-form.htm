@@ -1,0 +1,34 @@
+<html>
+<head>
+    $headElements
+  </head>
+<body>
+
+<div>
+
+    #if ($msg)
+      <div id="msgDiv"> $msg </div>
+    #end
+
+${form.startTag()}
+<ul>
+	<li>
+		<h1>Share an idea with Railinc</h1>
+	</li>
+	<li>
+		${form.fields.idea}
+	</li>
+	<li>
+		${form.fields.summary}
+	</li>
+	<li>
+		${form.fields.submit}
+	</li>
+</ul>	
+${form.endTag()}
+
+$links
+
+    $jsElements
+</div>
+</body></html>

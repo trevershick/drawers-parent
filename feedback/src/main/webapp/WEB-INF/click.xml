@@ -1,0 +1,11 @@
+<click-app>
+	<!-- Specify the Java package where Page classes can be found -->
+	<pages package="com.railinc.jook.drawers.feedback">
+	
+		<!-- <page path="index.htm" classname="com.mycorp.banking.page.Home"/> -->
+	</pages>
+
+
+	<mode value="debug" />
+
+</click-app>
