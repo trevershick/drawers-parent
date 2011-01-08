@@ -1,7 +1,11 @@
 package com.railinc.jook.drawers.myapps;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -48,7 +52,6 @@ public class SSORestService extends HttpServlet {
 			throws ServletException, IOException {
 		
 		String user = req.getRemoteUser();
-		user ="sdtxs01";
 		
 		String pathInfo = req.getRequestURI();
 		
@@ -101,17 +104,32 @@ public class SSORestService extends HttpServlet {
 			conn.setConnectTimeout(5000);
 			conn.setReadTimeout(5000);
 			int responseCode = conn.getResponseCode();
-			InputStream xml = conn.getInputStream();
-			
-			
-			try {
-				return parseResources(xml);
-			} finally {
+			if (200 == responseCode) {
+				InputStream xml = conn.getInputStream();
+				
+				
 				try {
-				if (xml != null) { xml.close(); }
-				} catch (Exception e) {
-					e.printStackTrace();
+					return parseResources(xml);
+				} finally {
+					try {
+					if (xml != null) { xml.close(); }
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
+			} else {
+				byte[] buffer = new byte[1024];
+				int read = 0;
+				InputStream is = conn.getErrorStream();
+				ByteArrayOutputStream baos = new ByteArrayOutputStream(1024);
+				while (is != null && (read=is.read(buffer)) > -1) {
+					baos.write(buffer,0,read);
+				}
+				if (is != null) {
+					is.close();
+				}
+				log(String.format("error getting apps for %s, from : %s, HTTP response code : %d, message : ", userId, theUrl, responseCode,baos.toString()));
+				baos.close();
 			}
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
