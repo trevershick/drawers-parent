@@ -23,5 +23,6 @@
 	</dependencies>
 	<modules>
 		<module>myapps</module>
+		<module>feedback</module>
 	</modules>
 </project>

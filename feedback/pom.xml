@@ -10,8 +10,7 @@
   <artifactId>drawer-feedback</artifactId>
   <packaging>war</packaging>
 
-  <name>My Applications Jook Drawer</name>
-  <url>http://maven.apache.org</url>
+  <name>Feedback Drawer</name>
 
   <dependencies>
     <dependency>
@@ -35,16 +34,6 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-    	<groupId>taglibs</groupId>
-    	<artifactId>standard</artifactId>
-    	<version>1.1.2</version>
-    </dependency>
-    <dependency>
-    	<groupId>jstl</groupId>
-    	<artifactId>jstl</artifactId>
-    	<version>1.1.2</version>
-    </dependency>
-    <dependency>
     	<groupId>org.apache.click</groupId>
     	<artifactId>click</artifactId>
     	<version>2.3.0-M1</version>
@@ -59,6 +48,6 @@
   </dependencies>
 
   <build>
-    <finalName>myapps</finalName>
+    <finalName>feedback</finalName>
   </build>
 </project>
