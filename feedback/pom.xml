@@ -5,6 +5,7 @@
         <artifactId>drawers-parent</artifactId>
         <groupId>com.railinc.jook.drawers</groupId>
         <version>0.0.1-SNAPSHOT</version>
+	<relativePath>../pom.xml</relativePath>
     </parent>
 
   <artifactId>drawer-feedback</artifactId>
