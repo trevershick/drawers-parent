@@ -1,0 +1,5 @@
+<Context>
+	<ResourceLink name="dataServicesUrl"
+	   global="globalDataServicesUrl"
+	   type="java.lang.String"/>
+</Context>
