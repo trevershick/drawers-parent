@@ -1,4 +1,4 @@
-package com.railinc.jook.drawers.documentation;
+package com.railinc.jook.ssoclient;
 
 import java.security.Principal;
 import java.util.Collection;

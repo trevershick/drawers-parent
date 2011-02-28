@@ -28,6 +28,9 @@ import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.SAXException;
 
+import com.railinc.jook.ssoclient.Resource;
+import com.railinc.jook.ssoclient.SSOResourcesSAXHandler;
+
 
 public class SSORestService extends HttpServlet {
 
@@ -65,18 +68,35 @@ public class SSORestService extends HttpServlet {
 		List<Resource> appsForUser = getAppsForUser(user);
 		
 		// return the user's document mapping
-		List<UserDocument> userDocs = retreiveUserDocumentationURLValuesforDocList(appsForUser);
-		
-		req.setAttribute("apps", userDocs);
+		if (appsForUser != null) {
+			List<UserDocument> userDocs = retrieveUserDocuments(appsForUser);
+			req.setAttribute("apps", userDocs);
+		}
 		req.getRequestDispatcher(String.format("/documentation.%s.jsp", format)).forward(req, resp);
 				
 	}
 	
-	public List<UserDocument> retreiveUserDocumentationURLValuesforDocList(List<Resource> appsForUser) {
+	public List<UserDocument> retrieveUserDocuments(List<Resource> appsForUser) {
 		
 		HashMap<Integer, UserDocument> userDocuemntTypeMap = getAllUserDocumentationTypesAsMap();
 
-		return updateUserDocumentationURLValuesforDocList(userDocuemntTypeMap, appsForUser);
+		List<UserDocument> userDocs = new ArrayList<UserDocument>();
+		// loop through the list of apps
+		for(Resource appForUser : appsForUser){
+			
+			UserDocument userDoc = new UserDocument();
+			// match the app with the user doc in the map
+			if("RailSight".equals(appForUser.getName())){
+				userDoc.setKey(userDocuemntTypeMap.get(1).getKey());
+				userDoc.setName(userDocuemntTypeMap.get(1).getName());
+				userDoc.setRelativeUrl(userDocuemntTypeMap.get(1).getRelativeUrl());
+				
+				userDocs.add(userDoc);
+			}
+			
+		}
+		
+		return userDocs;
 
 	}
 	
@@ -108,27 +128,7 @@ public class SSORestService extends HttpServlet {
 		return documentationTypeMap;
 	}
 	
-	private List<UserDocument> updateUserDocumentationURLValuesforDocList(HashMap<Integer, UserDocument> userDocuemntTypeMap, List<Resource> appsForUser) {
-		
-		List<UserDocument> userDocs = new ArrayList<UserDocument>();
-		// loop through the list of apps
-		for(Resource appForUser : appsForUser){
-			
-			UserDocument userDoc = new UserDocument();
-			// match the app with the user doc in the map
-			if("RailSight".equals(appForUser.getName())){
-				userDoc.setKey(userDocuemntTypeMap.get(1).getKey());
-				userDoc.setName(userDocuemntTypeMap.get(1).getName());
-				userDoc.setRelativeUrl(userDocuemntTypeMap.get(1).getRelativeUrl());
-				
-				userDocs.add(userDoc);
-			}
-			
-		}
-		
-		return userDocs;
-	}
-
+	
 	public void setDataServicesUrl(String dataServicesUrl) {
 		this.dataServicesUrl = dataServicesUrl;
 	}
@@ -149,6 +149,7 @@ public class SSORestService extends HttpServlet {
 	}
 
 	public List<Resource> getAppsForUser(String userId) {
+		userId = "sdtxs01";
 		String theUrl = MessageFormat.format(getDataServicesUrl() + "/SSOServices/sso/v1/resources/user/{0}", userId);
 		HttpURLConnection conn = null;
 		try {

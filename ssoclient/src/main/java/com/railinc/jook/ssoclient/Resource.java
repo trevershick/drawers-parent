@@ -2,7 +2,7 @@
  * Copyright (c) Railinc Corporation, 2009.
  * All rights reserved.
  */
-package com.railinc.jook.drawers.myapps;
+package com.railinc.jook.ssoclient;
 
 import java.io.Serializable;
 

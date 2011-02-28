@@ -1,4 +1,4 @@
-package com.railinc.jook.drawers.myapps;
+package com.railinc.jook.ssoclient;
 
 import java.util.List;
 

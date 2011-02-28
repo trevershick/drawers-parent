@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faceted-project>
-  <runtime name="_Users_trevershick_Development_apache-tomcat-6.0.26"/>
+  <runtime name="Apache Tomcat v6.0 on JDK 6"/>
   <fixed facet="wst.jsdt.web"/>
   <installed facet="jst.web" version="2.4"/>
   <installed facet="wst.jsdt.web" version="1.0"/>

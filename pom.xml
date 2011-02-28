@@ -25,5 +25,6 @@
 		<module>myapps</module>
 		<module>feedback</module>
 		<module>documentation</module>
+		<module>ssoclient</module>
 	</modules>
 </project>

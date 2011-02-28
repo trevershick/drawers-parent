@@ -7,7 +7,7 @@
 
 	<filter>
 		<filter-name>ssoPrincipalFilter</filter-name>
-		<filter-class>com.railinc.jook.drawers.documentation.SSOPrincipalFilter</filter-class>
+		<filter-class>com.railinc.jook.ssoclient.SSOPrincipalFilter</filter-class>
 	</filter>
 
 

@@ -1,44 +1,47 @@
 package com.railinc.jook.drawers.feedback;
 
-import org.apache.click.Page;
-import org.apache.click.control.Form;
 import org.apache.click.control.Submit;
 import org.apache.click.control.TextArea;
 import org.apache.click.control.TextField;
 import org.apache.click.util.Bindable;
 
-public class ReportAProblem extends Page {
+public class ReportAProblem extends DrawerForm {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -518770503041992248L;
-	@Bindable
-	protected Form form = new Form();
 	
 	@Bindable
-	protected LinkBar links = new LinkBar(form);
+	protected LinkBar links = new LinkBar(this);
+	
+	
 	
 	public ReportAProblem() {
-		TextArea idea = new TextArea("idea", "Describe your idea", 40, 4, true);
+		form.setId("drw" + String.valueOf(Math.abs(serialVersionUID)));
+		TextArea idea = new TextArea("idea", "Description");
+		idea.setRequired(true);
 		TextField summary = new TextField("summary",
-				"Sum it up with a short title", 40, true);
+				"Short title", 40, true);
 		Submit submit = new Submit("submit", "Continue");
-			
+		
+		
+		
 		form.add(idea);
 		form.add(summary);
 		form.add(submit);
 		form.setListener(this, "onSubmit");
-
-	
+		form.setLabelsPosition("top");
+		form.setJavaScriptValidation(false);
+		this.setTitle("Report a problem");
 	}
 
-	/**
+	/*
 	 * Handle the form submit event.
 	 */
 	public boolean onSubmit() {
 		if (form.isValid()) {
-			System.out.println("Yay, valid form");
+			this.flash.add("Your problem has been submitted");
 		} 
 		return true;
 	}
