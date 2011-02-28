@@ -1,0 +1,87 @@
+<html>
+<body>
+<div id="${form.id}_main">
+	<script>
+	function setFocus(field_id) {
+		jQuery("#" + field_id).focus();
+	}
+	</script>
+
+	<style>
+	#${form.id}_main {
+
+	}
+	#${form.id}_main h1 {
+
+	}
+	
+	#${form.id}_idea {
+		width:300px;
+	}
+	#${form.id}_summary {
+		width:300px;
+	}
+	
+	#${form.id}-errors td {
+		padding:5px;
+	}
+	#${form.id}-errors {
+		color:red;
+		background-color:#ffcccc;
+		font-size:10px;
+		width:300px;
+		border:1px solid red;
+	}
+	
+	#${form.id} .required {
+		display:none;
+	}
+	#${form.id} label {
+		float:left;
+		font-weight:bold;
+		font-size:10px;
+	}
+	
+	#${form.id} input {
+		float:left;
+		font-weight:bold;
+	}
+	
+	#${form.id}_submit {
+		background-color:#0055FF;
+		color:#FFFFFF;
+		padding:3px;
+		border:0px solid white;
+	}
+	</style>
+
+
+
+    #if ($msg)
+      <div id="${form.id}_msgDiv"> $msg </div>
+    #end
+
+<h1>${title}</h1>
+
+#parse($path)
+
+<script>
+	// make links
+jQuery(document).ready(function() {
+	jQuery('#${form.id}_main a.linkbar').click(
+			function() {
+				jQuery("#${form.id}").parent().load(jQuery(this).attr("href"));
+				return false;
+	});
+	var options = {target:"#${form.id}_main"}; 
+	jQuery("#${form.id}").ajaxForm(options);
+	
+	#foreach ($msg in $flash)
+	Jook.message('$msg');
+	#end
+	
+});
+</script>
+</div>
+</body>
+</html>
