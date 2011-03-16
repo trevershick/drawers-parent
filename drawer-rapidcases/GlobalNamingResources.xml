@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalNamingResources>
+       <Environment name="globalFootprintsServiceUrl" type="java.lang.String" value="http://webservicesdevrapid.railinc.com/MRcgi/MRWebServices.pl"/>
+       <Environment name="globalFootprintsAuthDomain" type="java.lang.String" value="RAILINC"/>
+       <Environment name="globalFootprintsAuthUser" type="java.lang.String" value="svc_web_services"/>
+       <Environment name="globalFootprintsAuthCredentials" type="java.lang.String" value="Railinc1"/>
+
+       <Environment name="globalFootprintsAttachmentToEmail" type="java.lang.String" value="devrailincsupport@railinc.com"/>
+       <Environment name="globalFootprintsAttachmentFromEmail" type="java.lang.String" value="trever.shick@railinc.com"/>
+       
+       <Resource name="globalFootprintsMailSession" auth="Container"
+            type="javax.mail.Session"
+            mail.smtp.host="mail.railinc.com"/>
+       
+</GlobalNamingResources>
