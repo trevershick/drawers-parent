@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-2.0.xsd 
+http://www.springframework.org/schema/aop 
+http://www.springframework.org/schema/aop/spring-aop-2.0.xsd 
+http://www.springframework.org/schema/tx 
+http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+http://www.springframework.org/schema/jee  
+http://www.springframework.org/schema/jee/spring-jee-2.0.xsd
+http://www.springframework.org/schema/util
+http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+	<jee:jndi-lookup id="footprintsServiceUrl"
+		jndi-name="java:comp/env/footprintsServiceUrl" expected-type="java.lang.String" />
+	<jee:jndi-lookup id="footprintsAuthDomain"
+		jndi-name="java:comp/env/footprintsAuthDomain" expected-type="java.lang.String" />
+	<jee:jndi-lookup id="footprintsAuthUser" jndi-name="java:comp/env/footprintsAuthUser"
+		expected-type="java.lang.String" />
+	<jee:jndi-lookup id="footprintsAuthCredentials"
+		jndi-name="java:comp/env/footprintsAuthCredentials" expected-type="java.lang.String" />
+	<jee:jndi-lookup id="footprintsAttachmentToEmail"
+		jndi-name="java:comp/env/footprintsAttachmentToEmail" expected-type="java.lang.String" />
+	<jee:jndi-lookup id="footprintsAttachmentFromEmail"
+		jndi-name="java:comp/env/footprintsAttachmentFromEmail" expected-type="java.lang.String" />
+	<jee:jndi-lookup id="footprintsMailSession"
+		jndi-name="java:comp/env/footprintsMailSession" expected-type="javax.mail.Session" />
+		
+	<bean id="wicketApplication" class="com.railinc.jook.drawers.rapidcases.WicketApplication">
+		<property name="footprintsService" ref="footprints"/>
+	</bean>
+	
+	
+	<bean id="footprints"
+		class="com.railinc.footprints.impl.FootprintsIntegrationServiceImpl">
+		<property name="domain" ref="footprintsAuthDomain" />
+		<property name="userId" ref="footprintsAuthUser" />
+		<property name="password" ref="footprintsAuthCredentials" />
+		<property name="defaultUri" ref="footprintsServiceUrl" />
+		<property name="statusConverter">
+			<bean class="com.railinc.footprints.impl.MapBasedStringMapper">
+				<property name="wellKnownToInternal" ref="wellKnownToInternalMap" />
+			</bean>
+		</property>
+		<property name="mailSession" ref="footprintsMailSession"/>
+		<property name="attachmentFromAddress" ref="footprintsAttachmentFromEmail"/>
+		<property name="attachmentToAddress" ref="footprintsAttachmentToEmail"/>
+	</bean>
+	
+	<util:map id="wellKnownToInternalMap">
+		<entry key="Assigned" value="Open" />
+		<!-- <entry key="Active" value="Active" /> -->
+		<entry key="Request" value="_REQUEST_" />
+		<!-- <entry key="Pending Customer Action" value="Pending__bCustomer__bAction" /> -->
+		<!-- <entry key="Customer Responded" value="Customer__bResponded" /> -->
+		<!-- <entry key="CSC Action Required" value="CSC__bAction__bRequired" /> -->
+		<!-- <entry key="Action Plan In Progress" value="Action__bPlan__bIn__bProgress" /> -->
+		<!-- <entry key="Potential Candidate" value="Potential__bCandidate" /> -->
+		<!-- <entry key="Planned Release" value="Planned__bRelease" /> -->
+		<!-- <entry key="Resolved - Awaiting Verification" value="Resolved__b__u__bAwaiting__bVerification" /> -->
+		<!-- <entry key="Closed" value="Closed" /> -->
+		<entry key="Deleted" value="_DELETED_" />
+	</util:map>
+</beans>
