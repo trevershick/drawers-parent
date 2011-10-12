@@ -29,6 +29,8 @@ public class WicketApplication extends WebApplication
      */
 	public WicketApplication()
 	{
+		mountBookmarkablePage("issue", IssuePage.class);
+		mountBookmarkablePage("home", HomePage.class);
 	}
 	
 //	public void init() {

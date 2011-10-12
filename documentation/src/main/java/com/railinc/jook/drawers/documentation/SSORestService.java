@@ -68,35 +68,35 @@ public class SSORestService extends HttpServlet {
 		List<Resource> appsForUser = getAppsForUser(user);
 		
 		// return the user's document mapping
-		if (appsForUser != null) {
+//		if (appsForUser != null) {
 			List<UserDocument> userDocs = retrieveUserDocuments(appsForUser);
 			req.setAttribute("apps", userDocs);
-		}
+//		}
 		req.getRequestDispatcher(String.format("/documentation.%s.jsp", format)).forward(req, resp);
 				
 	}
 	
 	public List<UserDocument> retrieveUserDocuments(List<Resource> appsForUser) {
-		
-		HashMap<Integer, UserDocument> userDocuemntTypeMap = getAllUserDocumentationTypesAsMap();
-
-		List<UserDocument> userDocs = new ArrayList<UserDocument>();
-		// loop through the list of apps
-		for(Resource appForUser : appsForUser){
-			
-			UserDocument userDoc = new UserDocument();
-			// match the app with the user doc in the map
-			if("RailSight".equals(appForUser.getName())){
-				userDoc.setKey(userDocuemntTypeMap.get(1).getKey());
-				userDoc.setName(userDocuemntTypeMap.get(1).getName());
-				userDoc.setRelativeUrl(userDocuemntTypeMap.get(1).getRelativeUrl());
-				
-				userDocs.add(userDoc);
-			}
-			
-		}
-		
-		return userDocs;
+		return new ArrayList<UserDocument>(getAllUserDocumentationTypesAsMap().values());
+//		HashMap<Integer, UserDocument> userDocuemntTypeMap = getAllUserDocumentationTypesAsMap();
+//
+//		List<UserDocument> userDocs = new ArrayList<UserDocument>();
+//		// loop through the list of apps
+//		for(Resource appForUser : appsForUser){
+//			
+//			UserDocument userDoc = new UserDocument();
+//			// match the app with the user doc in the map
+//			if("RailSight".equals(appForUser.getName())){
+//				userDoc.setKey(userDocuemntTypeMap.get(1).getKey());
+//				userDoc.setName(userDocuemntTypeMap.get(1).getName());
+//				userDoc.setRelativeUrl(userDocuemntTypeMap.get(1).getRelativeUrl());
+//				
+//				userDocs.add(userDoc);
+//			}
+//			
+//		}
+//		
+//		return userDocs;
 
 	}
 	
@@ -117,14 +117,6 @@ public class SSORestService extends HttpServlet {
 		
 		documentationTypeMap.put(2, vo2);
 		
-		/*
-		 * I need to move all the possible URL to the database
-		 * 
-		 * List<Resource> allDocumentationTypes = retrieveAllDocumentationTypes();
-		HashMap<Integer, UserDocument> documentationTypeMap = new HashMap<Integer, UserDocument>();
-		for (Resource vo : allDocumentationTypes) {
-			documentationTypeMap.put(vo.getKey(), vo);
-		}*/
 		return documentationTypeMap;
 	}
 	

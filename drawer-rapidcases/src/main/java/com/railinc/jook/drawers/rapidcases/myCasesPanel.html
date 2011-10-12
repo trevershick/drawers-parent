@@ -3,8 +3,6 @@
         <title>My Rapid cases</title>
     </head>
     <body>
-        <span wicket:id=errorMessage>No errors</span>
-       <div wicket:id="myCasesPanel">
         <table cellspacing="0" class="dataview" border="1">
         	<thead>
         		<tr>
@@ -16,14 +14,12 @@
         	</thead>
 		    <tbody>
 		       <tr wicket:id="issueListView">
-		         <td><a wicket:id="pageLink"><span wicket:id="id">id</span></a></td>
+		         <td><span wicket:id="id">ID</span></td>
 		         <td><span wicket:id="title">Title</span></td>
 		         <td><span wicket:id="status">Status</span></td>
 		         <td><span wicket:id="lastUpdated">Last Updated</span></td>
 		       </tr>
 		    </tbody>
 		</table>
-        </div>
-<!--       <a wicket:id="pageLink">Test link to page</a> -->  
     </body>
 </html>

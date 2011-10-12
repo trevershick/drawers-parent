@@ -3,7 +3,7 @@
     <wb-module deploy-name="drawer-documentation">
         <wb-resource deploy-path="/" source-path="/src/main/webapp"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
-        <dependent-module deploy-path="/WEB-INF/lib" handle="module:/resource/drawers-ssoclient/drawers-ssoclient">
+        <dependent-module archiveName="drawers-ssoclient-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/drawers-ssoclient/drawers-ssoclient">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="context-root" value="drawer-documentation"/>

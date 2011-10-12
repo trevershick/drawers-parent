@@ -41,8 +41,10 @@ public class ReportAProblem extends DrawerForm {
 	 */
 	public boolean onSubmit() {
 		if (form.isValid()) {
-			this.flash.add("Your problem has been submitted");
-		} 
+			ThankYouPage page = getContext().createPage(ThankYouPage.class);
+			page.setMessage("Your problem has been submitted. Case 3485 has been opened.");
+			setForward(page);
+		}
 		return true;
 	}
 }

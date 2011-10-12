@@ -36,4 +36,12 @@ public class GivePraise extends DrawerForm {
 		setTitle("Give praise");
 	}
 
+	public boolean onSubmit() {
+		if (form.isValid()) {
+			ThankYouPage page = getContext().createPage(ThankYouPage.class);
+			page.setMessage("Awww. That's so sweet.");
+			setForward(page);
+		}
+		return true;
+	}
 }

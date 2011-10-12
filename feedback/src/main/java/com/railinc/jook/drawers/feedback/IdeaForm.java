@@ -37,9 +37,12 @@ public class IdeaForm extends DrawerForm {
 	/**
 	 * Handle the form submit event.
 	 */
+
 	public boolean onSubmit() {
 		if (form.isValid()) {
-			msg = "Your name is " + form.getFieldValue("name");
+			ThankYouPage page = getContext().createPage(ThankYouPage.class);
+			page.setMessage("Thank you for your idea! We'll take a look.");
+			setForward(page);
 		}
 		return true;
 	}
